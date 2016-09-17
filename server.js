@@ -1,11 +1,18 @@
-var express=require('express');
-
+var express = require('express');
 var app = express();
 
-app.get('/', function (req, res) {
-  res.send('Hello World!');
-});
+app.get('/:datestring', function(req, res) {
+  if (Date.parse(req.params.datestring)) {
+    var d = new Date(req.params.datestring);
+    var date = {
+      unix: d.getTime(),
+      natural: d.toDateString()
+    };
+    res.write(JSON.stringify(date));
+  }
+  else res.write('not a valid date');
+  res.end();
 
-app.listen(8080, function () {
-  console.log('Example app listening on port 3000!');
-});
+}).on('error', console.error);
+
+app.listen(8080)
