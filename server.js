@@ -1,6 +1,11 @@
 var express = require('express');
 
 var app = express();
+app.set('port', (process.env.PORT || 5000));
+app.get('/',function(req,res){
+res.write('welcome to timestamp');
+res.end();
+});
 
 app.get('/:datestring', function(req, res) {
   if (Date.parse(req.params.datestring)) {
@@ -16,4 +21,4 @@ app.get('/:datestring', function(req, res) {
 
 }).on('error', console.error);
 
-app.listen(8080)
+app.listen(app.get('port'));
