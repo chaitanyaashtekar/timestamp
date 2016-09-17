@@ -10,7 +10,7 @@ app.get('/:datestring', function(req, res) {
     };
     res.write(JSON.stringify(date));
   }
-  else res.write('not a valid date');
+  else res.write(JSON.stringify({unix:null,natural:null}));
   res.end();
 
 }).on('error', console.error);
