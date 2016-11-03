@@ -1,10 +1,11 @@
 var express = require('express');
+var path=require('path');
 
 var app = express();
 app.set('port', (process.env.PORT || 5000));
+app.use('/public', express.static(process.cwd() + '/public'))
 app.get('/',function(req,res){
-res.write('welcome to timestamp');
-res.end();
+res.sendFile(process.cwd() + '/public/index.html');
 });
 
 app.get('/:datestring', function(req, res) {
